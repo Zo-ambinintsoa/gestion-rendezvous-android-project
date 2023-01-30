@@ -32,8 +32,6 @@ public class DbClass extends SQLiteOpenHelper {
 
     public DbClass(@Nullable Context context) {
         super(context, DB_NAME, null, 1);
-        SQLiteDatabase db = this.getWritableDatabase();
-
     }
 
     @Override
@@ -57,7 +55,7 @@ public class DbClass extends SQLiteOpenHelper {
     onCreate(db);
     }
 
-    long addPHandler(Patient patient){
+    public boolean addPHandler(Patient patient){
         long id;
         ContentValues values = new ContentValues();
         values.put(primaryKey_Column, patient.getId());
@@ -68,7 +66,22 @@ public class DbClass extends SQLiteOpenHelper {
         values.put(Patient_Column5, 1);
         SQLiteDatabase db = this.getWritableDatabase();
         id = db.insert(Patient_Table, null, values);
-        db.close();
-        return id;
+        if (id == -1){
+            db.close();
+            return false;
+        } else {
+            db.close();
+            return true;
+        }
+    }
+    boolean updatePHandler(int id, String NomP, String address, int montant, int nbJour) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues args = new ContentValues();
+        args.put(primaryKey_Column, id);
+        args.put(Patient_Column1, NomP);
+        args.put(Patient_Column3, address);
+        args.put(Patient_Column4, montant);
+        args.put(Patient_Column2, nbJour);
+        return db.update(Patient_Table, args, primaryKey_Column + "=" + id, null) > 0;
     }
 }

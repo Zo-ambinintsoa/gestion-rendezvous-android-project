@@ -35,6 +35,13 @@ public class Patient {
         this.montant = montant;
     }
 
+    public Patient( String nomP, int nbJour, String address, int montant) {
+        this.NomP = nomP;
+        this.nbJour = nbJour;
+        this.address = address;
+        this.montant = montant;
+    }
+
     public int getId() {
         return id;
     }

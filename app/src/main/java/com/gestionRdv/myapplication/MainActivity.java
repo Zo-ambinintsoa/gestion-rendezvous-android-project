@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import static java.lang.Integer.parseInt;
 
 public class MainActivity extends AppCompatActivity {
     DbClass db;
@@ -35,14 +38,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void addPatient(View view){
 
-        try {
             String NomP = this.NomP.getText().toString();
             String address = this.address.getText().toString();
-            String nbJour = this.nbJour.getText().toString();
-            String montant = this.montant.getText().toString();
-        } catch (Exception e) {
+            int nbJour = parseInt(this.nbJour.getText().toString());
+            int montant = parseInt(this.montant.getText().toString());
 
-        }
+            Patient p = new Patient(NomP, nbJour, address, montant);
+
+            boolean inserted = db.addPHandler(p);
+            if (inserted){
+                Toast.makeText(MainActivity.this, "Patient Ajouter", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(MainActivity.this, "un erreur est survenue", Toast.LENGTH_LONG).show();
+            }
     }
 
     public void updatePatient(View view){
