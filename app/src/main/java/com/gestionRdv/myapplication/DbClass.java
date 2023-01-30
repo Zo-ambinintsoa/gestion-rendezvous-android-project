@@ -38,14 +38,22 @@ public class DbClass extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        try {
     db.execSQL(" CREATE TABLE " + Doctor_Table + " ("+ primaryKey_Column +" INTEGER PRIMARY KEY AUTOINCREMENT, "+ Doctor_Column1 +" TEXT NOT NULL, "+ Doctor_Column2 +" INTEGER ) ");
     db.execSQL(" CREATE TABLE " + Patient_Table + " ("+ primaryKey_Column +" INTEGER PRIMARY KEY AUTOINCREMENT, " + Patient_Column5 +" INTEGER NOT NULL, "+ Patient_Column1 +" TEXT NOT NULL, "+ Patient_Column2 +" INTEGER, "+ Patient_Column3 +" TEXT, "+Patient_Column4+" INTEGER ) ");
-    }
+        } catch (Exception e) {
 
+        }
+    }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        try {
+
     db.execSQL("DROP TABLE IF EXISTS " + Doctor_Table);
     db.execSQL("DROP TABLE IF EXISTS " + Patient_Table);
+        } catch (Exception e) {
+
+        }
     onCreate(db);
     }
 
