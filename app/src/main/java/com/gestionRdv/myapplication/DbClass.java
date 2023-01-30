@@ -74,14 +74,14 @@ public class DbClass extends SQLiteOpenHelper {
             return true;
         }
     }
-    boolean updatePHandler(int id, String NomP, String address, int montant, int nbJour) {
+    boolean updatePHandler(Patient patient) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues args = new ContentValues();
-        args.put(primaryKey_Column, id);
-        args.put(Patient_Column1, NomP);
-        args.put(Patient_Column3, address);
-        args.put(Patient_Column4, montant);
-        args.put(Patient_Column2, nbJour);
-        return db.update(Patient_Table, args, primaryKey_Column + "=" + id, null) > 0;
+        ContentValues values = new ContentValues();
+        values.put(primaryKey_Column, patient.getId());
+        values.put(Patient_Column1, patient.getNomP());
+        values.put(Patient_Column2, patient.getNbJour());
+        values.put(Patient_Column3, patient.getAddress());
+        values.put(Patient_Column4, patient.getMontant());
+        return db.update(Patient_Table, values, primaryKey_Column + "=" + patient.getId(), null) > 0;
     }
 }
