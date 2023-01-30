@@ -31,12 +31,12 @@ public class MainActivity extends AppCompatActivity {
         btnSave1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                addPatient();
             }
         });
     }
 
-    public void addPatient(View view){
+    public void addPatient(){
 
             String NomP = this.NomP.getText().toString();
             String address = this.address.getText().toString();

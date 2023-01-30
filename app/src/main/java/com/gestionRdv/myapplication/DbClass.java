@@ -66,11 +66,10 @@ public class DbClass extends SQLiteOpenHelper {
         values.put(Patient_Column5, 1);
         SQLiteDatabase db = this.getWritableDatabase();
         id = db.insert(Patient_Table, null, values);
+        db.close();
         if (id == -1){
-            db.close();
             return false;
         } else {
-            db.close();
             return true;
         }
     }
